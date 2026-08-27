@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>محمد حسن الموسوي — كاتب محتوى تسويقي</title>
+<meta name="description" content="كاتب محتوى تسويقي ومستشار تسويق وكاتب خطط محتوى — بغداد، العراق. أعمال مرئية وخبرات وعملاء.">
+<meta name="theme-color" content="#0E0F12">
+
+<!-- لا preload للفيديو: المروحة لم تعد في أول الشاشة، فتُحمَّل عند الاقتراب منها -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/ThmanyahSerifDisplay-Black.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/ThmanyahSans-Regular.woff2">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Outfit:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i id="progFill"></i></div>
+<a class="skip" href="#showcase" data-en="Skip to work" data-ar="تخطَّ إلى الأعمال">تخطَّ إلى الأعمال</a>
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="nav" id="nav">
+  <div class="nav__in">
+
+    <a class="brand" href="#top">
+      <span class="brand__name" id="brandName"></span>
+      <span class="brand__sep" aria-hidden="true"></span>
+      <span class="brand__role" id="brandRole"></span>
+    </a>
+
+    <!-- زر القائمة — يظهر على الجوال فقط -->
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="navPanel">
+      <span class="burger__box" aria-hidden="true"><i></i><i></i></span>
+      <span class="sr" data-en="Menu" data-ar="القائمة">القائمة</span>
+    </button>
+
+    <!-- على الديسكتوب: display:contents فيندمج في الشبكة.
+         على الجوال: يتحوّل إلى لوح ملء الشاشة. -->
+    <div class="nav__panel" id="navPanel">
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#showcase" data-en="Selected" data-ar="مختارات">مختارات</a>
+        <a href="#reel"     data-en="All work" data-ar="كل الأعمال">كل الأعمال</a>
+        <a href="#about"      data-en="About"      data-ar="نبذة">نبذة</a>
+        <a href="#experience" data-en="Experience" data-ar="الخبرات">الخبرات</a>
+        <a href="#contact" data-en="Contact" data-ar="تواصل">تواصل</a>
+      </nav>
+      <div class="nav__end">
+        <button class="pill" type="button" id="langBtn" aria-label="Switch language / تبديل اللغة">
+          <span id="langTxt">EN</span>
+        </button>
+        <a class="pill pill--solid" href="#contact" data-en="Hire me" data-ar="تواصل معي">تواصل معي</a>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ══════════ 1 · HERO + FAN ══════════ -->
+<section class="hero">
+  <div class="glow" id="glow" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <div class="hero__top" id="heroTop">
+    <p class="tagpill">
+      <i class="dot" aria-hidden="true"></i>
+      <span id="heroCity"></span>
+    </p>
+    <h1 class="hero__title">
+      <span id="heroName"></span>
+      <span id="heroRole"></span>
+    </h1>
+    <p class="hero__lede" id="heroLede"></p>
+  </div>
+
+  <p class="scroll-hint" aria-hidden="true">
+    <span data-en="Scroll" data-ar="انزل">انزل</span>
+    <i class="scroll-hint__line"></i>
+  </p>
+</section>
+
+<!-- ══════════ 2 · MARQUEE ══════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__row" id="marquee"></div>
+</div>
+
+<!-- ══════════ 3 · SHOWCASE — المروحة ══════════ -->
+<section class="showcase" id="showcase">
+  <div class="glow glow--soft" aria-hidden="true"></div>
+
+  <div class="band__in showcase__head">
+    <h2 class="band__title" data-rv="text" data-sec="01" data-en="Selected" data-ar="مختارات">مختارات</h2>
+    <p class="showcase__sub" data-rv="text" data-en="Vertical work — swipe or use the arrows"
+       data-ar="أعمال عمودية — اسحب أو استخدم الأسهم">أعمال عمودية — اسحب أو استخدم الأسهم</p>
+  </div>
+
+  <div class="deck" id="deck" role="group" aria-roledescription="carousel" aria-label="Video works"></div>
+
+  <div class="deck__bar">
+    <button class="round" type="button" id="prevBtn" aria-label="Previous"><span aria-hidden="true">←</span></button>
+    <button class="cta" type="button" id="openBtn">
+      <span data-en="Watch full" data-ar="شاهد كاملاً">شاهد كاملاً</span>
+      <i class="cta__arrow" aria-hidden="true">▶</i>
+    </button>
+    <button class="round" type="button" id="nextBtn" aria-label="Next"><span aria-hidden="true">→</span></button>
+  </div>
+
+  <div class="deck__meter">
+    <span class="deck__num"><span id="deckNow">1</span> / <span id="deckAll">5</span></span>
+    <span class="deck__track"><i class="deck__fill" id="deckFill"></i></span>
+    <span class="deck__dur" id="deckDur">0:00</span>
+  </div>
+</section>
+
+<!-- ══════════ 4 · RAIL — كل الأعمال في صف أفقي واحد ══════════ -->
+<section class="band--rail" id="reel">
+  <!-- القسم يُثبَّت، والصف يتحرّك أفقياً بمقدار نزولك عمودياً -->
+  <div class="rail__pin">
+    <div class="band__in rail__head">
+      <h2 class="band__title" data-rv="text" data-sec="02" data-en="All work" data-ar="كل الأعمال">كل الأعمال</h2>
+      <p class="rail__hint">
+        <span data-en="Keep scrolling" data-ar="واصل النزول">واصل النزول</span>
+        <i class="rail__bar" aria-hidden="true"><b id="railFill"></b></i>
+      </p>
+    </div>
+    <div class="rail" id="rail" role="region" aria-label="All work">
+      <div class="rail__track" id="railTrack"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 4 · NUMBERS ══════════ -->
+<section class="band band--soft" id="numbers">
+  <div class="band__in">
+    <p class="eyebrow" data-rv="text" data-en="By the numbers" data-ar="بالأرقام">بالأرقام</p>
+    <div class="stats__wrap">
+      <i class="stats__sweep" aria-hidden="true"><b id="statSweep"></b></i>
+      <ul class="stats" id="stats"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 6 · ABOUT ══════════ -->
+<!-- نبذة + التخصصات -->
+<section class="band" id="about">
+  <div class="band__in">
+    <h2 class="band__title" data-rv="text" data-sec="03" data-en="About" data-ar="نبذة مهنية">نبذة مهنية</h2>
+    <p class="words" id="aboutWords" data-rv="text"></p>
+    <h3 class="sub-title" data-rv="text" data-en="Skills &amp; specialisations" data-ar="المهارات والتخصصات">المهارات والتخصصات</h3>
+    <ul class="skills" id="skills"></ul>
+  </div>
+</section>
+
+<!-- الخبرات العملية -->
+<section class="band" id="experience">
+  <div class="band__in">
+    <h2 class="band__title" data-rv="text" data-sec="04" data-en="Experience" data-ar="الخبرات العملية">الخبرات العملية</h2>
+    <ol class="exp" id="exp"></ol>
+  </div>
+</section>
+
+<!-- العملاء والشهادات -->
+<section class="band band--soft" id="clients">
+  <div class="band__in">
+    <h2 class="band__title" data-rv="text" data-sec="05" data-en="Clients &amp; achievements" data-ar="عملاء وإنجازات">عملاء وإنجازات</h2>
+    <ul class="clients" id="clients-list"></ul>
+    <h3 class="sub-title" data-rv="text" data-en="Certificates" data-ar="الشهادات">الشهادات</h3>
+    <ul class="certs" id="certs"></ul>
+  </div>
+</section>
+
+<!-- ══════════ 7 · CONTACT ══════════ -->
+<section class="band" id="contact">
+  <div class="band__in">
+    <h2 class="band__title" data-rv="text" data-sec="06" data-en="Contact" data-ar="تواصل">تواصل</h2>
+    <a class="mail" data-rv="text" id="phoneLink" href="#"></a>
+    <div class="contact__cols" data-rv="text">
+      <div>
+        <p class="foot__lab" data-en="Based in" data-ar="المقر">المقر</p>
+        <p id="contactArea"></p>
+      </div>
+      <div>
+        <p class="foot__lab" data-en="Available for" data-ar="متاح لـ">متاح لـ</p>
+        <p data-en="Content writing · Marketing plans · Consulting"
+           data-ar="كتابة المحتوى · الخطط التسويقية · الاستشارات">كتابة المحتوى · الخطط التسويقية · الاستشارات</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p class="brand__name" id="footName"></p>
+  <p class="foot__end">© <span id="yr">2026</span> — <span data-en="All rights reserved" data-ar="جميع الحقوق محفوظة">جميع الحقوق محفوظة</span></p>
+</footer>
+
+<!-- ══════════ PLAYER ══════════ -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbTitle" hidden>
+  <div class="lb__scrim" data-close></div>
+  <div class="lb__panel">
+    <button class="round lb__x" type="button" data-close aria-label="Close"><span aria-hidden="true">✕</span></button>
+    <div class="lb__stage" id="lbStage"></div>
+    <div class="lb__label">
+      <h3 class="lb__title" id="lbTitle"></h3>
+      <p class="lb__note" id="lbNote"></p>
+      <p class="lb__meta" id="lbMeta"></p>
+      <div class="lb__nav">
+        <button class="round" type="button" id="lbPrev" aria-label="Previous"><span aria-hidden="true">←</span></button>
+        <button class="round" type="button" id="lbNext" aria-label="Next"><span aria-hidden="true">→</span></button>
+        <span class="lb__count" id="lbCount"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
