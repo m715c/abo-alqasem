@@ -702,55 +702,77 @@ a { color: inherit; text-decoration: none; }
 }
 :root[lang="ar"] .sub-title { font-weight: 900; }
 
-/* المهارات والتخصصات — قائمة مرقّمة بدل شبكة تترك خانات فارغة */
+/* ── المهارات والتخصصات ──────────────────────────────────
+   كل مهارة سطر بحجم عنوان، مفرَّغ الحروف (outline) في الأصل.
+   حين يعبر السطر نطاق التركيز في منتصف الشاشة تمتلئ حروفه
+   ويظهر شريط ذهبي ووسمه الإنجليزي. الحركة قابلة للعكس:
+   ترجع للأعلى فيرجع السطر مفرَّغاً. */
 .skills { border-block-start: 1px solid var(--line); }
+
 .skills li {
   position: relative;
   display: grid;
-  grid-template-columns: 2.4rem minmax(0, 1fr) auto;
-  align-items: baseline;
-  gap: .5rem 1rem;
-  padding: clamp(.85rem, 2vw, 1.25rem) clamp(.5rem, 1.5vw, 1rem);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(.7rem, 2vw, 1.5rem);
+  padding: clamp(.85rem, 2.2vh, 1.5rem) 0 clamp(.85rem, 2.2vh, 1.5rem) 0;
+  padding-inline-start: clamp(.9rem, 2.5vw, 1.8rem);
   border-block-end: 1px solid var(--line);
-  transition: background-color var(--dur) var(--ease), padding-inline-start var(--dur) var(--ease);
+  transition: padding-inline-start 600ms var(--cine);
 }
-.skills li::after {
+.skills li.on { padding-inline-start: clamp(1.5rem, 4vw, 3rem); }
+
+/* الشريط الذهبي على حافة السطر النشط */
+.skills li::before {
   content: ''; position: absolute;
-  inset-block: 0; inset-inline-start: 0; width: 2px;
+  inset-block: 18%; inset-inline-start: 0;
+  width: 3px; border-radius: 3px;
   background: var(--gold);
-  transform: scaleY(0); transform-origin: 50% 0;
-  transition: transform var(--dur) var(--ease);
+  transform: scaleY(0); transform-origin: 50% 50%;
+  transition: transform 600ms var(--cine);
 }
-.skills li:hover { background: var(--surface); padding-inline-start: clamp(1rem, 2.5vw, 1.6rem); }
-.skills li:hover::after { transform: scaleY(1); }
+.skills li.on::before { transform: scaleY(1); }
 
 .skill__n {
-  font-size: .74rem; color: var(--gold);
-  letter-spacing: var(--track-lat); font-variant-numeric: tabular-nums;
+  font-size: .72rem; color: #3F4650;
+  letter-spacing: var(--track-lat);
+  font-variant-numeric: tabular-nums;
+  transition: color 600ms var(--cine);
 }
+.skills li.on .skill__n { color: var(--gold); }
+
 .skill__t {
-  font-family: var(--f-head); font-weight: 500;
-  font-size: clamp(1rem, .9rem + .5vw, 1.4rem);
-  line-height: 1.4; letter-spacing: var(--track-h2);
-  color: var(--muted);
-  transition: color var(--dur) var(--ease);
+  font-family: var(--f-head);
+  font-weight: var(--w-display);
+  font-size: clamp(1.3rem, .85rem + 2.2vw, 2.75rem);
+  line-height: 1.28;
+  letter-spacing: var(--track-h2);
+  color: #2C333C;                    /* بديل مرئي إن غاب دعم التفريغ */
+  transition: color 600ms var(--cine), -webkit-text-stroke-color 600ms var(--cine);
 }
-:root[lang="ar"] .skill__t { font-weight: 700; line-height: 1.6; }
-.skills li.lit .skill__t { color: var(--text); }
-.skills li:hover .skill__t { color: var(--text); }
+:root[lang="ar"] .skill__t { line-height: 1.5; }
+
+/* الحروف مفرَّغة حيث يُدعم التفريغ */
+@supports (-webkit-text-stroke: 1px red) {
+  .skill__t { color: transparent; -webkit-text-stroke: 1px #39404A; }
+  .skills li.on .skill__t { -webkit-text-stroke-color: transparent; }
+}
+/* يأتي بعد @supports ليفوز في الحالتين */
+.skills li.on .skill__t { color: var(--text); }
 
 .skill__tag {
-  flex: none; font-size: .68rem; color: #5D636C;
+  font-size: .7rem; color: var(--gold);
   letter-spacing: var(--track-lat); white-space: nowrap;
-  transition: color var(--dur) var(--ease);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 600ms var(--cine), transform 600ms var(--cine);
 }
-.skills li.lit .skill__tag { color: #7C838C; }
-.skills li:hover .skill__tag { color: var(--gold); }
+.skills li.on .skill__tag { opacity: 1; transform: none; }
 
-@media (max-width: 560px) {
-  .skills li { grid-template-columns: 1.9rem minmax(0, 1fr); }
+@media (max-width: 620px) {
+  .skills li { grid-template-columns: auto minmax(0, 1fr); row-gap: .3rem; }
   .skill__tag { grid-column: 2; }
 }
+
 
 /* الخبرات العملية */
 .exp {

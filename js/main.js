@@ -606,12 +606,14 @@
       }
     }
 
-    /* المهارات تضيء سطراً سطراً */
+    /* المهارات: السطر داخل نطاق التركيز تمتلئ حروفه — والحركة قابلة
+       للعكس، ترجع للأعلى فيرجع السطر مفرَّغاً. */
     if (skillsEl) {
       var sk = skillsEl.children;
       for (var q2 = 0; q2 < sk.length; q2++) {
-        if (sk[q2].classList.contains('lit')) continue;
-        if (sk[q2].getBoundingClientRect().top < vh * .78) sk[q2].classList.add('lit');
+        var kb = sk[q2].getBoundingClientRect();
+        var mid = kb.top + kb.height / 2;
+        sk[q2].classList.toggle('on', mid > vh * .18 && mid < vh * .82);
       }
     }
 
