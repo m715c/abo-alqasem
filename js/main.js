@@ -122,7 +122,11 @@
   }
 
   function place() {
-    var n = VERT.length, cards = deck.children;
+    var cards = deck.children;
+    /* حارس: قد يُستدعى place قبل بناء البطاقات (متصفح بلا
+       IntersectionObserver مثلاً) — بلا هذا ينهار الموقع كله. */
+    var n = Math.min(VERT.length, cards.length);
+    if (!n) return;
     for (var i = 0; i < n; i++) {
       var off = i - idx;
       if (off > n / 2) off -= n;
@@ -320,6 +324,25 @@
   }
 
   /* ═══ 6. STATS / STEPS / WORDS / MARQUEE ═══ */
+
+  function setText(id, txt) { var el = document.getElementById(id); if (el) el.textContent = txt; }
+
+  function renderProfile() {
+    setText('brandName',   t(PROFILE.name));
+    setText('brandRole',   t(PROFILE.role));
+    setText('heroName',    t(PROFILE.name));
+    setText('heroRole',    t(PROFILE.role));
+    setText('heroCity',    t(PROFILE.city));
+    setText('heroLede',    t(PROFILE.lede));
+    setText('footName',    t(PROFILE.name));
+    setText('contactArea', t(PROFILE.area));
+
+    var ph = document.getElementById('phoneLink');
+    if (ph) {
+      ph.textContent = num(PROFILE.phone);
+      ph.setAttribute('href', 'tel:' + PROFILE.phoneIntl);
+    }
+  }
 
   function renderSkills() {
     var el = document.getElementById('skills');
