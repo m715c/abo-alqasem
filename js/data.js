@@ -125,6 +125,35 @@ var WORKS = [
   { id: 'v08', file: 'v08.mp4', ar: 1.7778, dur: 135, mb: 11.7,
     title: { en: 'Work 08', ar: 'عمل ٠٨' },
     note:  { en: 'Widescreen edit.', ar: 'مونتاج بصيغة عريضة.' } }
+,
+
+  { id: 'v09', file: 'v09.mp4', ar: 0.5625, dur: 30, mb: 3.7,
+    title: { en: 'Work 09', ar: 'عمل ٠٩' },
+    note:  { en: 'Vertical cut for social platforms.', ar: 'مونتاج عمودي لمنصات التواصل.' } },
+
+  { id: 'v10', file: 'v10.mp4', ar: 0.5625, dur: 50, mb: 5.5,
+    title: { en: 'Work 10', ar: 'عمل ١٠' },
+    note:  { en: 'Vertical cut for social platforms.', ar: 'مونتاج عمودي لمنصات التواصل.' } },
+
+  { id: 'v11', file: 'v11.mp4', ar: 0.5625, dur: 42, mb: 3.8,
+    title: { en: 'Work 11', ar: 'عمل ١١' },
+    note:  { en: 'Vertical cut for social platforms.', ar: 'مونتاج عمودي لمنصات التواصل.' } },
+
+  { id: 'v12', file: 'v12.mp4', ar: 0.5625, dur: 28, mb: 2.7,
+    title: { en: 'Work 12', ar: 'عمل ١٢' },
+    note:  { en: 'Vertical cut for social platforms.', ar: 'مونتاج عمودي لمنصات التواصل.' } },
+
+  { id: 'v13', file: 'v13.mp4', ar: 0.5625, dur: 56, mb: 12.5,
+    title: { en: 'Work 13', ar: 'عمل ١٣' },
+    note:  { en: 'Vertical cut for social platforms.', ar: 'مونتاج عمودي لمنصات التواصل.' } },
+
+  { id: 'v14', file: 'v14.mp4', ar: 0.5625, dur: 123, mb: 11.0,
+    title: { en: 'Work 14', ar: 'عمل ١٤' },
+    note:  { en: 'Vertical cut for social platforms.', ar: 'مونتاج عمودي لمنصات التواصل.' } },
+
+  { id: 'v15', file: 'v15.mp4', ar: 1.7778, dur: 39, mb: 6.7,
+    title: { en: 'Work 15', ar: 'عمل ١٥' },
+    note:  { en: 'Widescreen edit.', ar: 'مونتاج بصيغة عريضة.' } },
 ];
 
 /* ------------------------------------------------------------------
