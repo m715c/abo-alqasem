@@ -31,10 +31,6 @@
 
   var L = {
     watch:  { en: 'Watch full', ar: 'شاهد كاملاً' },
-    works:  { en: 'works',      ar: 'عملاً' },
-    mins:   { en: 'minutes',    ar: 'دقيقة' },
-    posts:  { en: 'roles',      ar: 'أدوار مهنية' },
-    skills: { en: 'skills',     ar: 'تخصصاً' },
     vert:   { en: 'Vertical 9:16',   ar: 'عمودي ٩:١٦' },
     wide:   { en: 'Widescreen 16:9', ar: 'أفقي ١٦:٩' },
     nosound:{ en: 'No sound',        ar: 'بلا صوت' }
@@ -58,7 +54,6 @@
     renderDeck();
     renderRail();
     renderBts();
-    renderStats();
     renderSkills();
     renderExperience();
     renderWords();
@@ -326,46 +321,6 @@
 
   /* ═══ 6. STATS / STEPS / WORDS / MARQUEE ═══ */
 
-  function renderStats() {
-    var el = document.getElementById('stats');
-    var total = 0;
-    for (var i = 0; i < WORKS.length; i++) total += WORKS[i].dur;
-    var rows = [
-      [num(WORKS.length),           L.works[lang]],
-      [num(EXPERIENCE.length),      L.posts[lang]],
-      [num(SKILLS.length),          L.skills[lang]],
-      [num(Math.round(total / 60)), L.mins[lang]]
-    ];
-    el.innerHTML = '';
-    rows.forEach(function (r) {
-      var li = document.createElement('li');
-      li.setAttribute('data-rv', 'scale');
-      var n = document.createElement('span'); n.className = 'stat__n'; n.textContent = r[0];
-      var l = document.createElement('span'); l.className = 'stat__l'; l.textContent = r[1];
-      li.appendChild(n); li.appendChild(l);
-      el.appendChild(li);
-    });
-  }
-
-  function setText(id, txt) { var el = document.getElementById(id); if (el) el.textContent = txt; }
-
-  function renderProfile() {
-    setText('brandName',  t(PROFILE.name));
-    setText('brandRole',  t(PROFILE.role));
-    setText('heroName',   t(PROFILE.name));
-    setText('heroRole',   t(PROFILE.role));
-    setText('heroCity',   t(PROFILE.city));
-    setText('heroLede',   t(PROFILE.lede));
-    setText('footName',   t(PROFILE.name));
-    setText('contactArea', t(PROFILE.area));
-
-    var ph = document.getElementById('phoneLink');
-    if (ph) {
-      ph.textContent = num(PROFILE.phone);
-      ph.setAttribute('href', 'tel:' + PROFILE.phoneIntl);
-    }
-  }
-
   function renderSkills() {
     var el = document.getElementById('skills');
     if (!el) return;
@@ -554,8 +509,6 @@
   var progEl   = document.getElementById('progFill');
   var navEl    = document.getElementById('nav');
   var hintEl   = document.querySelector('.scroll-hint');
-  var statsEl  = document.getElementById('stats');
-  var statSweep = document.getElementById('statSweep');
   var expEl    = document.getElementById('exp');
   var skillsEl = document.getElementById('skills');
   var navLinks = document.querySelectorAll('.nav__links a');
@@ -692,19 +645,6 @@
       }
     }
 
-    /* شريط الأرقام: خط ذهبي يمسح عرضه بمقدار مرورك عليه */
-    if (statSweep && statsEl) {
-      var nr = statsEl.getBoundingClientRect();
-      var np = clamp((vh * .95 - nr.top) / (nr.height + vh * .35), 0, 1);
-      statSweep.style.transform = 'scaleX(' + np.toFixed(4) + ')';
-    }
-
-    /* الأرقام تعدّ تصاعدياً عند ظهورها */
-    if (statsEl && !statsEl.dataset.counted && statsEl.getBoundingClientRect().top < vh * .85) {
-      statsEl.dataset.counted = '1';
-      countUp();
-    }
-
     /* تمييز رابط القسم الحالي */
     var secs = ['showcase', 'reel', 'about', 'contact'], cur = '';
     for (var q = 0; q < secs.length; q++) {
@@ -731,25 +671,6 @@
     else looping = false;
   }
   function onScroll() { if (!looping) { looping = true; requestAnimationFrame(frame); } }
-
-  /* عدّاد تصاعدي للأرقام */
-  function countUp() {
-    var nodes = statsEl.querySelectorAll('.stat__n');
-    for (var i = 0; i < nodes.length; i++) {
-      (function (el) {
-        var target = parseInt(String(el.textContent).replace(/[^0-9]/g, ''), 10) || 0;
-        if (!target) return;
-        var t0 = null, dur = 1100;
-        function step(ts) {
-          if (t0 === null) t0 = ts;
-          var p = clamp((ts - t0) / dur, 0, 1);
-          el.textContent = num(Math.round(target * (1 - Math.pow(1 - p, 3))));
-          if (p < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      })(nodes[i]);
-    }
-  }
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', function () { measure(); onScroll(); }, { passive: true });

@@ -689,62 +689,6 @@ a { color: inherit; text-decoration: none; }
 .band__hint { flex: none; font-size: var(--t-sm); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: .42rem 1rem; }
 @media (max-width: 620px) { .band__hint { display: none; } }
 
-/* ── أرقام ───────────────────────────────────────────────
-   شريط واحد بفواصل رأسية بدل صناديق مكدّسة، و٢×٢ على الجوال
-   بدل عمود واحد طويل. وخط ذهبي يمسح عرض الشريط مع النزول. */
-.eyebrow {
-  font-size: .74rem; color: var(--gold);
-  letter-spacing: var(--track-lat);
-  margin-block-end: clamp(1rem, 2.5vw, 1.75rem);
-}
-
-.stats__wrap { position: relative; border-block: 1px solid var(--line); }
-.stats__sweep {
-  position: absolute; inset-block-start: -1px; inset-inline: 0;
-  height: 2px; overflow: hidden; pointer-events: none; z-index: 2;
-}
-.stats__sweep b {
-  display: block; height: 100%; width: 100%;
-  background: linear-gradient(to var(--grad, right), var(--gold), rgba(242, 178, 60, .12));
-  transform: scaleX(0); transform-origin: var(--o, left);
-}
-:root[dir="rtl"] .stats__sweep b { --o: right; --grad: left; }
-
-.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.stats li {
-  position: relative;
-  padding: clamp(1.5rem, 3.4vw, 2.6rem) clamp(.9rem, 2vw, 1.6rem);
-  border-inline-start: 1px solid var(--line);
-  transition: background-color var(--dur) var(--ease);
-}
-.stats li:first-child { border-inline-start: 0; }
-.stats li:hover { background: var(--surface-2); }
-
-.stats li::after {
-  content: ''; position: absolute;
-  inset-block-end: 0; inset-inline-start: clamp(.9rem, 2vw, 1.6rem);
-  width: 2rem; height: 2px; background: var(--gold);
-  transform: scaleX(0); transform-origin: var(--o, left);
-  transition: transform var(--dur) var(--ease);
-}
-:root[dir="rtl"] .stats li::after { --o: right; }
-.stats li:hover::after { transform: scaleX(1); }
-
-.stat__n {
-  display: block;
-  font-family: var(--f-head); font-weight: var(--w-display);
-  font-size: clamp(2.6rem, 1.2rem + 4.4vw, 4.6rem);
-  line-height: .95; letter-spacing: var(--track-h1);
-  font-variant-numeric: tabular-nums;
-}
-.stat__l { display: block; font-size: var(--t-sm); color: var(--muted); margin-block-start: .6rem; }
-
-@media (max-width: 760px) {
-  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .stats li:nth-child(odd) { border-inline-start: 0; }
-  .stats li:nth-child(n+3) { border-block-start: 1px solid var(--line); }
-}
-
 /* ───────────  11. ABOUT  ─────────── */
 .words {
   font-family: var(--f-head); font-weight: 500;

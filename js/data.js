@@ -29,7 +29,6 @@ var PROFILE = {
 var SKILLS = [
   { en: 'Marketing copywriting', ar: 'كتابة المحتوى التسويقي', tag: 'Copywriting' },
   { en: 'Creative and general content writing', ar: 'كتابة المحتوى الإبداعي والعام', tag: 'Content Writing' },
-  { en: 'Marketing consulting & digital identity', ar: 'الاستشارات التسويقية وبناء الهوية الرقمية', tag: '' },
   { en: 'Content strategy planning', ar: 'تخطيط استراتيجيات المحتوى', tag: 'Content Strategy' },
   { en: 'Full marketing plans', ar: 'كتابة الخطط التسويقية الشاملة', tag: '' },
   { en: 'Social media content management', ar: 'إدارة المحتوى عبر منصات التواصل', tag: '' },
@@ -45,7 +44,7 @@ var EXPERIENCE = [
   {
     role:  { en: 'Account Manager', ar: 'أكاونت مانجر' },
     org:   { en: 'Logic Company', ar: 'شركة لوجك' },
-    time:  { en: '1 year', ar: 'سنة واحدة' },
+    time:  { en: '', ar: '' },
     items: [
       { en: 'Company opening events, executed end to end.', ar: 'تنفيذ افتتاحيات الشركات من أولها إلى آخرها' },
       { en: 'Full advertising campaigns for clients across sectors, including education.', ar: 'إدارة حملات إعلانية متكاملة لعملاء من مجالات مختلفة، منها قطاع التعليم (المدارس)' },
