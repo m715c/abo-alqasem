@@ -170,6 +170,10 @@ var WORKS = [
   { id: 'v17', file: 'v17.mp4', ar: 0.55, dur: 66, mb: 5.8,
     title: { en: 'Work 17', ar: 'عمل ١٧' },
     note:  { en: 'Vertical cut for social platforms.', ar: 'مونتاج عمودي لمنصات التواصل.' } },
+
+  { id: 'v18', file: 'v18.mp4', ar: 1.8182, dur: 138, mb: 12.2,
+    title: { en: 'Work 18', ar: 'عمل ١٨' },
+    note:  { en: 'Widescreen edit.', ar: 'مونتاج بصيغة عريضة.' } },
 ];
 
 /* ------------------------------------------------------------------
