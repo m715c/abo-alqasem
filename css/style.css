@@ -590,6 +590,65 @@ a { color: inherit; text-decoration: none; }
 .no-pin .rail__track { transform: none !important; }
 .no-pin .rcard { scroll-snap-align: center; }
 
+/* ───────────  8b. كواليس  ───────────
+   شريط أفقي ينجرف مع مرور القسم في الشاشة. مقاطع صغيرة ثانوية
+   بلا صوت، تمييزاً لها عن الأعمال الأساسية. */
+.bts {
+  position: relative;
+  padding-block: var(--sec);
+  border-block-start: 1px solid var(--line);
+  overflow: hidden;
+}
+.bts__strip {
+  margin-block-start: clamp(1.25rem, 3vw, 2rem);
+  clip-path: inset(0);          /* قصّ بلا إنشاء حاوية تمرير */
+}
+.bts__track {
+  display: flex;
+  gap: clamp(.6rem, 1.2vw, 1rem);
+  width: max-content;
+  padding-inline: max(var(--pad), calc((100vw - var(--maxw)) / 2 + var(--pad)));
+  will-change: transform;
+}
+
+.bcard {
+  position: relative; flex: none;
+  height: clamp(200px, 30vh, 320px);
+  width: calc(clamp(200px, 30vh, 320px) * var(--ar, .5625));
+  border-radius: 14px; overflow: hidden;
+  background: #000; border: 1px solid var(--line);
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.bcard video { width: 100%; height: 100%; object-fit: cover; background: #000; }
+.bcard:hover { border-color: rgba(255, 255, 255, .22); transform: translateY(-4px); }
+
+.bcard__veil {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(6, 7, 9, .82) 0%, transparent 44%);
+}
+.bcard__d {
+  position: absolute; inset-block-end: .55rem; inset-inline-start: .65rem;
+  font-size: .68rem; color: rgba(255, 255, 255, .78);
+  font-variant-numeric: tabular-nums; pointer-events: none;
+}
+/* شارة كتم دائمة — تؤكّد للزائر أن الصمت مقصود */
+.bcard__mute {
+  position: absolute; inset-block-start: .55rem; inset-inline-end: .55rem;
+  width: 24px; height: 24px; border-radius: 999px;
+  display: grid; place-items: center;
+  background: rgba(10, 11, 14, .6); border: 1px solid rgba(255, 255, 255, .18);
+  color: rgba(255, 255, 255, .7); font-size: .6rem; font-style: normal;
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .bcard { height: clamp(180px, 26vh, 260px); width: calc(clamp(180px, 26vh, 260px) * var(--ar, .5625)); }
+}
+
+.no-pin .bts__strip { clip-path: none; overflow-x: auto; }
+.no-pin .bts__track { transform: none !important; }
+
 /* ───────────  9. BANDS  ─────────── */
 .band { padding: var(--sec) 0; border-block-start: 1px solid var(--line); }
 .band--soft { background: var(--surface); }

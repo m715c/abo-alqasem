@@ -36,7 +36,8 @@
     posts:  { en: 'roles',      ar: 'أدوار مهنية' },
     skills: { en: 'skills',     ar: 'تخصصاً' },
     vert:   { en: 'Vertical 9:16',   ar: 'عمودي ٩:١٦' },
-    wide:   { en: 'Widescreen 16:9', ar: 'أفقي ١٦:٩' }
+    wide:   { en: 'Widescreen 16:9', ar: 'أفقي ١٦:٩' },
+    nosound:{ en: 'No sound',        ar: 'بلا صوت' }
   };
 
   function applyLang(next) {
@@ -56,6 +57,7 @@
     renderProfile();
     renderDeck();
     renderRail();
+    renderBts();
     renderStats();
     renderSkills();
     renderExperience();
@@ -221,6 +223,7 @@
     });
     watchRail();
     sizeRail();
+    sizeBts();
   }
 
   /* مسافة الرحلة الأفقية، ثم ارتفاع القسم الذي يقودها.
@@ -255,6 +258,62 @@
     railCards.forEach(function (c) { c.el._src = c.work.src; railIO.observe(c.el); });
   }
 
+
+  /* ═══ 4b. كواليس ═══ */
+
+  var btsTrack = document.getElementById('btsTrack');
+  var btsSec   = document.getElementById('bts');
+  var btsTravel = 0;
+
+  function renderBts() {
+    if (!btsTrack) return;
+    btsTrack.innerHTML = '';
+    BTS.forEach(function (w, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bcard';
+      b.setAttribute('data-rv', 'img');
+      b.style.setProperty('--ar', w.ar);
+      b.setAttribute('aria-label', t(w.title) + ' — ' + dur(w.dur) + ' — ' + L.nosound[lang]);
+
+      var v = makeVideo(w, 'frame');      /* makeVideo يكتم دائماً */
+      b.appendChild(v);
+
+      var veil = document.createElement('span'); veil.className = 'bcard__veil';
+      var d = document.createElement('span'); d.className = 'bcard__d'; d.textContent = dur(w.dur);
+      var m = document.createElement('i'); m.className = 'bcard__mute';
+      m.setAttribute('aria-hidden', 'true'); m.textContent = '🔇';
+
+      b.appendChild(veil); b.appendChild(d); b.appendChild(m);
+      b.addEventListener('click', function () { openLb(i, BTS); });
+      btsTrack.appendChild(b);
+    });
+    watchBts();
+    sizeBts();
+  }
+
+  function sizeBts() {
+    if (!btsTrack || !btsSec) return;
+    btsTravel = Math.max(0, btsTrack.scrollWidth - btsSec.clientWidth);
+  }
+
+  /* المقطع الظاهر في الشريط يعمل، والباقي يتوقّف */
+  var btsIO = null;
+  function watchBts() {
+    if (!('IntersectionObserver' in window) || !btsTrack) return;
+    if (btsIO) btsIO.disconnect();
+    btsIO = new IntersectionObserver(function (en) {
+      en.forEach(function (e) {
+        var v = e.target.querySelector('video');
+        if (!v) return;
+        if (e.isIntersecting) {
+          v.preload = 'auto'; v.dataset.live = '1';
+          if (lb.hidden && !REDUCED) safePlay(v);
+        } else { v.dataset.live = '0'; v.pause(); }
+      });
+    }, { threshold: .4 });
+    for (var i = 0; i < btsTrack.children.length; i++) btsIO.observe(btsTrack.children[i]);
+  }
 
   /* ═══ 6. STATS / STEPS / WORDS / MARQUEE ═══ */
 
@@ -424,28 +483,37 @@
   var lbMeta  = document.getElementById('lbMeta');
   var lbCount = document.getElementById('lbCount');
   var lbIdx = -1, lastFocus = null;
+  var lbSet = WORKS;        /* القائمة النشطة في المشغّل */
 
   function fillLb(i) {
-    var w = WORKS[i]; if (!w) return;
+    var w = lbSet[i]; if (!w) return;
     lbStage.innerHTML = '';
     var v = document.createElement('video');
     v.controls = true; v.playsInline = true; v.setAttribute('playsinline', '');
     v.preload = 'auto'; v.src = w.src; v.autoplay = true;
+    if (w.mute) {
+      /* الكواليس بلا صوت: نكتمها ونعيد كتمها إن حاول أحد رفعه */
+      v.muted = true; v.setAttribute('muted', '');
+      v.addEventListener('volumechange', function () { if (!v.muted) v.muted = true; });
+    }
     lbStage.appendChild(v); safePlay(v);
 
     lbTitle.textContent = t(w.title);
     lbNote.textContent  = t(w.note);
-    lbMeta.textContent  = dur(w.dur) + '  ·  ' + num(w.mb) + ' MB  ·  ' + (w.ar > 1 ? L.wide[lang] : L.vert[lang]);
-    lbCount.textContent = num(i + 1) + ' / ' + num(WORKS.length);
+    lbMeta.textContent  = dur(w.dur) + '  ·  ' + num(w.mb) + ' MB  ·  ' +
+                          (w.ar > 1 ? L.wide[lang] : L.vert[lang]) +
+                          (w.mute ? '  ·  ' + L.nosound[lang] : '');
+    lbCount.textContent = num(i + 1) + ' / ' + num(lbSet.length);
     lbIdx = i;
   }
 
   function pauseAll() {
-    var vs = document.querySelectorAll('.deck video, .rcard video');
+    var vs = document.querySelectorAll('.deck video, .rcard video, .bcard video');
     for (var i = 0; i < vs.length; i++) if (!vs[i].paused) vs[i].pause();
   }
 
-  function openLb(i) {
+  function openLb(i, set) {
+    lbSet = set || WORKS;
     lastFocus = document.activeElement;
     pauseAll();
     fillLb(i);
@@ -460,13 +528,13 @@
     lb.classList.remove('is-open');
     document.body.style.overflow = '';
     var done = function () {
-      lb.hidden = true; lbStage.innerHTML = ''; lbIdx = -1;
+      lb.hidden = true; lbStage.innerHTML = ''; lbIdx = -1; lbSet = WORKS;
       if (lastFocus && lastFocus.focus) lastFocus.focus();
       place(); onScroll();
     };
     REDUCED ? done() : setTimeout(done, 280);
   }
-  function lbMove(d) { var n = WORKS.length; fillLb((lbIdx + d + n) % n); }
+  function lbMove(d) { var n = lbSet.length; fillLb((lbIdx + d + n) % n); }
 
   document.getElementById('lbPrev').addEventListener('click', function () { lbMove(-1); });
   document.getElementById('lbNext').addEventListener('click', function () { lbMove(1); });
@@ -512,6 +580,7 @@
   function measure() {
     vh = window.innerHeight;
     sizeRail();
+    sizeBts();
     docH = Math.max(1, document.documentElement.scrollHeight - vh);
     revealEls = [].slice.call(document.querySelectorAll('[data-rv]'));
   }
@@ -615,6 +684,14 @@
         var mid = kb.top + kb.height / 2;
         sk[q2].classList.toggle('on', mid > vh * .18 && mid < vh * .82);
       }
+    }
+
+    /* شريط الكواليس ينجرف أفقياً أثناء عبور قسمه الشاشة */
+    if (btsTravel > 0 && btsSec) {
+      var bb = btsSec.getBoundingClientRect();
+      var bp = clamp((vh - bb.top) / (vh + bb.height), 0, 1);
+      var brtl = root.getAttribute('dir') === 'rtl';
+      btsTrack.style.transform = 'translate3d(' + ((brtl ? 1 : -1) * btsTravel * bp).toFixed(1) + 'px,0,0)';
     }
 
     /* شريط الأرقام: خط ذهبي يمسح عرضه بمقدار مرورك عليه */

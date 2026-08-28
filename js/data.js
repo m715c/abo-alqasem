@@ -156,6 +156,29 @@ var WORKS = [
     note:  { en: 'Widescreen edit.', ar: 'مونتاج بصيغة عريضة.' } }
 ];
 
+/* ------------------------------------------------------------------
+   الكواليس — مقاطع من وراء الكاميرا.
+   كلها بلا صوت في كل مكان: في الشريط وفي المشغّل على السواء.
+-------------------------------------------------------------------*/
+var BTS = [
+  { id: 'b01', file: 'b01.mp4', ar: 0.5500, dur: 12, mb: 1.1 },
+  { id: 'b02', file: 'b02.mp4', ar: 0.5500, dur: 12, mb: 1.1 },
+  { id: 'b03', file: 'b03.mp4', ar: 0.5641, dur: 35, mb: 3.1 },
+  { id: 'b04', file: 'b04.mp4', ar: 0.5641, dur: 6,  mb: 0.6 },
+  { id: 'b05', file: 'b05.mp4', ar: 0.5641, dur: 14, mb: 1.2 },
+  { id: 'b06', file: 'b06.mp4', ar: 0.5641, dur: 12, mb: 1.0 },
+  { id: 'b07', file: 'b07.mp4', ar: 0.5641, dur: 32, mb: 2.8 },
+  { id: 'b08', file: 'b08.mp4', ar: 0.5500, dur: 32, mb: 2.8 }
+];
+
+for (var bi = 0; bi < BTS.length; bi++) {
+  BTS[bi].src   = 'assets/bts/' + BTS[bi].file;
+  BTS[bi].mute  = true;                       /* لا صوت أبداً */
+  BTS[bi].title = { en: 'Behind the scenes ' + (bi + 1 < 10 ? '0' + (bi + 1) : bi + 1),
+                    ar: 'كواليس ' + (bi + 1 < 10 ? '٠' + '١٢٣٤٥٦٧٨٩'[bi] : '') };
+  BTS[bi].note  = { en: 'From behind the camera.', ar: 'من وراء الكاميرا.' };
+}
+
 for (var i = 0; i < WORKS.length; i++) {
   WORKS[i].src = 'assets/video/' + WORKS[i].file;
 }
