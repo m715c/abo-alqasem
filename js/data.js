@@ -6,22 +6,22 @@
 
 var PROFILE = {
   name:  { en: 'Mohamed Hassan Al-Mousawi', ar: 'محمد حسن الموسوي' },
-  role:  { en: 'Marketing Copywriter', ar: 'كاتب محتوى تسويقي' },
+  role:  { en: 'Account Manager · Content Writer', ar: 'أكاونت مانجر · كاتب محتوى' },
   roles: {
-    en: 'Marketing Copywriter · Marketing Consultant · Content Strategist',
-    ar: 'كاتب محتوى تسويقي · مستشار تسويق · كاتب خطط محتوى'
+    en: 'Account Manager & Content Writer',
+    ar: 'أكاونت مانجر وكاتب محتوى'
   },
   city:  { en: 'Baghdad · Iraq', ar: 'بغداد · العراق' },
   area:  { en: 'Al-Shalijiya, Baghdad — Iraq', ar: 'الشالجية، بغداد — العراق' },
   phone: '07732717805',
   phoneIntl: '+9647732717805',
   lede: {
-    en: 'I write marketing and creative content that hits its target — and I build the strategy behind it from scratch.',
-    ar: 'أكتب المحتوى التسويقي والإبداعي الذي يصيب هدفه — وأبني الاستراتيجية التي تقف خلفه من الصفر.'
+    en: 'I run campaigns end to end and write the content that carries them.',
+    ar: 'أدير الحملات من أولها إلى آخرها، وأكتب المحتوى الذي يحملها.'
   },
   about: {
-    en: 'A specialist in marketing and creative content writing with a documented track record in producing professional digital content that meets marketing objectives and strengthens the digital presence of brands. I have worked with leading influencers, major platforms and advertising agencies, and I build content strategies and execute them from the ground up.',
-    ar: 'متخصص في كتابة المحتوى التسويقي والمحتوى الإبداعي، أمتلك خبرة عملية موثّقة في إنتاج محتوى رقمي احترافي يحقّق الأهداف التسويقية ويعزّز الحضور الرقمي للعلامات التجارية. عملت مع نخبة من المؤثرين والمنصات الرائدة والشركات الإعلانية، وأتمتّع بقدرة عالية على بناء استراتيجيات المحتوى وتنفيذها من الصفر.'
+    en: 'Account manager and content writer with hands-on experience in marketing. I have run company openings and full advertising campaigns for clients across different sectors, including education. I believe any project succeeds the moment you truly understand the client and build trust that lasts.',
+    ar: 'أكاونت مانجر وكاتب محتوى بخبرة عملية في قطاع التسويق. نفّذت افتتاحيات شركات وأدرت حملات إعلانية متكاملة لعملاء من مجالات مختلفة، منها قطاع التعليم. وأؤمن أن نجاح أي مشروع يبدأ من فهم العميل فهماً حقيقياً وبناء ثقة تدوم.'
   }
 };
 
@@ -34,7 +34,10 @@ var SKILLS = [
   { en: 'Full marketing plans', ar: 'كتابة الخطط التسويقية الشاملة', tag: '' },
   { en: 'Social media content management', ar: 'إدارة المحتوى عبر منصات التواصل', tag: '' },
   { en: 'Audience analysis & message targeting', ar: 'تحليل الجمهور المستهدف وتوجيه الرسائل', tag: '' },
-  { en: 'Monthly & quarterly content plans', ar: 'صياغة خطط المحتوى الشهرية والفصلية', tag: '' }
+  { en: 'Monthly & quarterly content plans', ar: 'صياغة خطط المحتوى الشهرية والفصلية', tag: '' },
+  { en: 'Negotiation', ar: 'التفاوض', tag: '' },
+  { en: 'Problem solving', ar: 'حل المشكلات', tag: '' },
+  { en: 'Organisation & coordination', ar: 'التنظيم والتنسيق', tag: '' }
 ];
 
 /* الخبرات العملية */
@@ -44,10 +47,11 @@ var EXPERIENCE = [
     org:   { en: 'Logic Company', ar: 'شركة لوجك' },
     time:  { en: '1 year', ar: 'سنة واحدة' },
     items: [
-      { en: 'Following marketing campaigns and overseeing their execution.', ar: 'متابعة الحملات التسويقية والإشراف على سير تنفيذها' },
-      { en: 'Supervising the photography operations for each campaign.', ar: 'الإشراف على عمليات التصوير الخاصة بالحملات' },
-      { en: 'Supervising the campaign copy.', ar: 'الإشراف على كتابة المحتوى الخاص بالحملات' },
-      { en: 'Coordinating between photography, copy and design teams so the output stays coherent.', ar: 'التنسيق بين الفرق المختلفة (التصوير والكتابة والتصميم) لضمان انسجام المخرجات' }
+      { en: 'Company opening events, executed end to end.', ar: 'تنفيذ افتتاحيات الشركات من أولها إلى آخرها' },
+      { en: 'Full advertising campaigns for clients across sectors, including education.', ar: 'إدارة حملات إعلانية متكاملة لعملاء من مجالات مختلفة، منها قطاع التعليم (المدارس)' },
+      { en: 'Honouring ceremonies for top students, built on ideas nobody had used before.', ar: 'تنظيم حفلات تكريم للأوائل بأفكار مبتكرة ومختلفة' },
+      { en: 'A creative solution shaped to each client — which is what turned them into repeat clients.', ar: 'حلول إبداعية تُفصَّل لكل عميل على حدة، وهو ما حوّله إلى عميل دائم' },
+      { en: 'Coordinating photography, copy and design so the output stays coherent.', ar: 'التنسيق بين فرق التصوير والكتابة والتصميم لضمان انسجام المخرجات' }
     ]
   },
   {
@@ -73,47 +77,14 @@ var EXPERIENCE = [
     ]
   },
   {
-    role:  { en: 'Photographer', ar: 'مصوّر فوتوغرافي' },
-    org:   { en: 'Freelance', ar: 'عمل حر' },
-    time:  { en: '', ar: '' },
+    role:  { en: 'Photography', ar: 'التصوير' },
+    org:   { en: 'Within campaigns and events', ar: 'ضمن الحملات والفعاليات' },
+    time:  { en: 'Working experience, not a specialisation', ar: 'خبرة عملية لا تخصّص' },
     items: [
-      { en: 'Product, event and celebration photography for clients across Iraq.', ar: 'تصوير المنتجات والفعاليات والحفلات لصالح عملاء متعددين في العراق' },
-      { en: 'Combining photography with copywriting to deliver complete creative packages.', ar: 'الدمج بين مهارات التصوير وكتابة المحتوى لتقديم حزم إبداعية متكاملة للعملاء' }
+      { en: 'Shooting products and events within client campaigns.', ar: 'تصوير المنتجات والفعاليات ضمن حملات العملاء' },
+      { en: 'Combining shooting with copywriting to deliver a complete package.', ar: 'الدمج بين التصوير وكتابة المحتوى لتقديم حزمة متكاملة' }
     ]
   },
-  {
-    role:  { en: 'Independent Marketing Consultant', ar: 'مستشار تسويق مستقل' },
-    org:   { en: 'Freelance', ar: 'عمل حر' },
-    time:  { en: '', ar: '' },
-    items: [
-      { en: 'Marketing consulting for individuals, companies and institutions in Iraq.', ar: 'تقديم الاستشارات التسويقية للأفراد والشركات والمؤسسات في العراق' },
-      { en: 'Full marketing plans covering content strategy and the right channels.', ar: 'بناء خطط تسويقية شاملة تتضمن استراتيجية المحتوى والقنوات المناسبة' },
-      { en: 'Detailed content plans written to each client’s commercial goals.', ar: 'كتابة وتطوير خطط المحتوى المفصّلة للعملاء وفق أهدافهم التجارية' },
-      { en: 'Target market analysis and actionable strategic recommendations.', ar: 'تحليل السوق المستهدف وتقديم توصيات استراتيجية قابلة للتنفيذ' }
-    ]
-  }
-];
-
-/* أمثلة من العملاء */
-var CLIENTS = [
-  {
-    name:   { en: 'Jarayan Al-Omr Complex', ar: 'مجمع جريان العمر' },
-    work:   { en: 'Digital presence and marketing content across social platforms.', ar: 'إدارة الحضور الرقمي والمحتوى التسويقي عبر منصات التواصل الاجتماعي' },
-    result: { en: '', ar: '' }
-  },
-  {
-    name:   { en: 'Anwar Al-Huda Foundation', ar: 'مؤسسة أنوار الهدى' },
-    work:   { en: 'A complete marketing plan built from scratch.', ar: 'بناء خطة تسويقية متكاملة' },
-    result: { en: '2,000+ app downloads', ar: 'أكثر من ٢٠٠٠ تحميل واستخدام للتطبيق' }
-  }
-];
-
-/* الشهادات */
-var CERTS = [
-  {
-    name: { en: 'Creativity & Innovation Certificate', ar: 'شهادة الإبداع والابتكار' },
-    by:   { en: 'Issued by IDU', ar: 'الجهة المانحة: منظمة IDU' }
-  }
 ];
 
 /* ------------------------------------------------------------------

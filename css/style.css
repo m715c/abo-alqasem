@@ -590,64 +590,68 @@ a { color: inherit; text-decoration: none; }
 .no-pin .rail__track { transform: none !important; }
 .no-pin .rcard { scroll-snap-align: center; }
 
-/* ───────────  8b. كواليس  ───────────
-   شريط أفقي ينجرف مع مرور القسم في الشاشة. مقاطع صغيرة ثانوية
-   بلا صوت، تمييزاً لها عن الأعمال الأساسية. */
+/* ───────────  8b. كواليس — حائط لقطات  ───────────
+   شبكة مائلة بزوايا مختلفة كأنها صور مرمية على طاولة، وكل بطاقة
+   تنزلق بسرعة مختلفة قليلاً مع السكرول فيتنفّس الحائط. */
 .bts {
   position: relative;
   padding-block: var(--sec);
   border-block-start: 1px solid var(--line);
   overflow: hidden;
 }
-.bts__strip {
-  margin-block-start: clamp(1.25rem, 3vw, 2rem);
-  clip-path: inset(0);          /* قصّ بلا إنشاء حاوية تمرير */
+.bts__frame {
+  max-width: var(--maxw); margin-inline: auto;
+  padding-inline: var(--pad);
+  margin-block-start: clamp(1.5rem, 3.5vw, 2.75rem);
 }
-.bts__track {
-  display: flex;
-  gap: clamp(.6rem, 1.2vw, 1rem);
-  width: max-content;
-  padding-inline: max(var(--pad), calc((100vw - var(--maxw)) / 2 + var(--pad)));
-  will-change: transform;
+.bts__wall {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(.7rem, 1.8vw, 1.6rem);
+  align-items: start;
 }
 
+.bwrap { position: relative; }
+
 .bcard {
-  position: relative; flex: none;
-  height: clamp(200px, 30vh, 320px);
-  width: calc(clamp(200px, 30vh, 320px) * var(--ar, .5625));
-  border-radius: 14px; overflow: hidden;
-  background: #000; border: 1px solid var(--line);
+  position: relative;
+  display: block; width: 100%;
+  aspect-ratio: var(--ar, .5625);
+  border-radius: 12px; overflow: hidden;
+  background: #000;
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 36px -22px rgba(0, 0, 0, .85);
   cursor: pointer;
-  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  will-change: transform;
+  transition: box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .bcard video { width: 100%; height: 100%; object-fit: cover; background: #000; }
-.bcard:hover { border-color: rgba(255, 255, 255, .22); transform: translateY(-4px); }
+.bcard:hover {
+  border-color: rgba(255, 255, 255, .28);
+  box-shadow: 0 26px 50px -22px rgba(0, 0, 0, .95), 0 0 50px -26px var(--hue);
+  z-index: 3;
+}
 
 .bcard__veil {
   position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(to top, rgba(6, 7, 9, .82) 0%, transparent 44%);
+  background: linear-gradient(to top, rgba(6, 7, 9, .8) 0%, transparent 42%);
 }
 .bcard__d {
-  position: absolute; inset-block-end: .55rem; inset-inline-start: .65rem;
-  font-size: .68rem; color: rgba(255, 255, 255, .78);
+  position: absolute; inset-block-end: .5rem; inset-inline-start: .6rem;
+  font-size: .66rem; color: rgba(255, 255, 255, .78);
   font-variant-numeric: tabular-nums; pointer-events: none;
 }
-/* شارة كتم دائمة — تؤكّد للزائر أن الصمت مقصود */
 .bcard__mute {
-  position: absolute; inset-block-start: .55rem; inset-inline-end: .55rem;
-  width: 24px; height: 24px; border-radius: 999px;
-  display: grid; place-items: center;
-  background: rgba(10, 11, 14, .6); border: 1px solid rgba(255, 255, 255, .18);
-  color: rgba(255, 255, 255, .7); font-size: .6rem; font-style: normal;
+  position: absolute; inset-block-start: .5rem; inset-inline-end: .5rem;
+  padding: .16rem .42rem; border-radius: 999px;
+  background: rgba(10, 11, 14, .62); border: 1px solid rgba(255, 255, 255, .18);
+  color: rgba(255, 255, 255, .72); font-size: .58rem; font-style: normal;
+  letter-spacing: var(--track-lat);
   pointer-events: none;
 }
 
-@media (max-width: 700px) {
-  .bcard { height: clamp(180px, 26vh, 260px); width: calc(clamp(180px, 26vh, 260px) * var(--ar, .5625)); }
-}
-
-.no-pin .bts__strip { clip-path: none; overflow-x: auto; }
-.no-pin .bts__track { transform: none !important; }
+@media (max-width: 900px) { .bts__wall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .bts__wall { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ───────────  9. BANDS  ─────────── */
 .band { padding: var(--sec) 0; border-block-start: 1px solid var(--line); }
@@ -893,49 +897,6 @@ a { color: inherit; text-decoration: none; }
   background: var(--line);
 }
 @media (max-width: 820px) { .exp__row { grid-template-columns: 1fr; gap: 1rem; } }
-
-/* العملاء */
-.clients { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(.8rem, 1.6vw, 1.25rem); }
-.client {
-  background: var(--bg); border: 1px solid var(--line); border-radius: 16px;
-  padding: clamp(1.2rem, 2.4vw, 1.8rem);
-  transition: border-color var(--dur) var(--ease);
-}
-.client:hover { border-color: #3A404A; transform: translateY(-4px); }
-.client { transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease); }
-.client__n { font-family: var(--f-head); font-weight: var(--w-display); font-size: var(--t-lg); line-height: var(--lead-h2); }
-.client__w { font-size: var(--t-sm); color: var(--muted); margin-block-start: .5rem; }
-.client__r::before {
-  content: ''; width: 5px; height: 5px; border-radius: 50%;
-  background: var(--gold); flex: none;
-}
-.client__r {
-  display: inline-flex; align-items: center; gap: .5rem;
-  margin-block-start: .9rem;
-  padding: .32rem .8rem; border-radius: 999px;
-  background: rgba(242, 178, 60, .12); border: 1px solid rgba(242, 178, 60, .32);
-  color: var(--gold); font-size: .74rem; font-variant-numeric: tabular-nums;
-}
-
-/* الشهادات */
-.certs { display: grid; gap: .6rem; }
-.cert {
-  position: relative;
-  display: flex; align-items: baseline; flex-wrap: wrap; gap: .3rem .9rem;
-  padding-inline-start: 2.4rem;
-}
-.cert::before {
-  content: '✦'; position: absolute;
-  inset-inline-start: 1rem; inset-block-start: .85rem;
-  color: var(--gold); font-size: .8rem;
-}
-.cert {
-  padding: .9rem 1.15rem;
-  background: var(--bg); border: 1px solid var(--line); border-radius: 14px;
-}
-.cert__n { font-family: var(--f-head); font-weight: 700; font-size: var(--t-sm); }
-:root[lang="ar"] .cert__n { font-weight: 900; }
-.cert__b { font-size: .74rem; color: var(--muted); }
 
 /* ───────────  12. CONTACT / FOOTER  ─────────── */
 .mail {

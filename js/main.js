@@ -61,7 +61,6 @@
     renderStats();
     renderSkills();
     renderExperience();
-    renderClients();
     renderWords();
     renderMarquee();
     if (lbIdx > -1) fillLb(lbIdx);
@@ -223,7 +222,6 @@
     });
     watchRail();
     sizeRail();
-    sizeBts();
   }
 
   /* مسافة الرحلة الأفقية، ثم ارتفاع القسم الذي يقودها.
@@ -259,48 +257,56 @@
   }
 
 
-  /* ═══ 4b. كواليس ═══ */
+  /* ═══ 4b. كواليس — حائط لقطات ═══ */
 
-  var btsTrack = document.getElementById('btsTrack');
-  var btsSec   = document.getElementById('bts');
-  var btsTravel = 0;
+  var btsWall = document.getElementById('btsTrack');
+  var btsSec  = document.getElementById('bts');
+  var btsCards = [];
 
   function renderBts() {
-    if (!btsTrack) return;
-    btsTrack.innerHTML = '';
+    if (!btsWall) return;
+    btsWall.innerHTML = '';
+    btsCards = [];
+
     BTS.forEach(function (w, i) {
+      var wrap = document.createElement('div');
+      wrap.className = 'bwrap';
+      wrap.setAttribute('data-rv', 'card');   /* الكشف على الغلاف */
+
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'bcard';
-      b.setAttribute('data-rv', 'img');
       b.style.setProperty('--ar', w.ar);
       b.setAttribute('aria-label', t(w.title) + ' — ' + dur(w.dur) + ' — ' + L.nosound[lang]);
 
-      var v = makeVideo(w, 'frame');      /* makeVideo يكتم دائماً */
-      b.appendChild(v);
+      b.appendChild(makeVideo(w, 'frame'));   /* makeVideo يكتم دائماً */
 
       var veil = document.createElement('span'); veil.className = 'bcard__veil';
       var d = document.createElement('span'); d.className = 'bcard__d'; d.textContent = dur(w.dur);
       var m = document.createElement('i'); m.className = 'bcard__mute';
-      m.setAttribute('aria-hidden', 'true'); m.textContent = '🔇';
+      m.setAttribute('aria-hidden', 'true'); m.textContent = 'MUTE';
 
       b.appendChild(veil); b.appendChild(d); b.appendChild(m);
       b.addEventListener('click', function () { openLb(i, BTS); });
-      btsTrack.appendChild(b);
+
+      wrap.appendChild(b);
+      btsWall.appendChild(wrap);
+
+      /* زاوية ثابتة لكل بطاقة وسرعة انزلاق مختلفة — يعطي الحائط
+         إحساس صور مرمية لا شبكة منتظمة */
+      btsCards.push({
+        el: b,
+        rot: [-3.2, 2.4, -1.6, 3.0, -2.6, 1.8, -3.4, 2.2][i % 8],
+        speed: [26, 46, 14, 38, 20, 50, 30, 42][i % 8]
+      });
     });
     watchBts();
-    sizeBts();
   }
 
-  function sizeBts() {
-    if (!btsTrack || !btsSec) return;
-    btsTravel = Math.max(0, btsTrack.scrollWidth - btsSec.clientWidth);
-  }
-
-  /* المقطع الظاهر في الشريط يعمل، والباقي يتوقّف */
+  /* المقطع الظاهر يعمل، والباقي يتوقّف */
   var btsIO = null;
   function watchBts() {
-    if (!('IntersectionObserver' in window) || !btsTrack) return;
+    if (!('IntersectionObserver' in window) || !btsWall) return;
     if (btsIO) btsIO.disconnect();
     btsIO = new IntersectionObserver(function (en) {
       en.forEach(function (e) {
@@ -311,8 +317,8 @@
           if (lb.hidden && !REDUCED) safePlay(v);
         } else { v.dataset.live = '0'; v.pause(); }
       });
-    }, { threshold: .4 });
-    for (var i = 0; i < btsTrack.children.length; i++) btsIO.observe(btsTrack.children[i]);
+    }, { threshold: .35 });
+    for (var i = 0; i < btsWall.children.length; i++) btsIO.observe(btsWall.children[i]);
   }
 
   /* ═══ 6. STATS / STEPS / WORDS / MARQUEE ═══ */
@@ -409,39 +415,6 @@
       li.appendChild(head); li.appendChild(ul);
       el.appendChild(li);
     });
-  }
-
-  function renderClients() {
-    var el = document.getElementById('clients-list');
-    if (el) {
-      el.innerHTML = '';
-      CLIENTS.forEach(function (c) {
-        var li = document.createElement('li');
-        li.className = 'client';
-        li.setAttribute('data-rv', 'card');
-        var n = document.createElement('h3'); n.className = 'client__n'; n.textContent = t(c.name);
-        var w = document.createElement('p'); w.className = 'client__w'; w.textContent = t(c.work);
-        li.appendChild(n); li.appendChild(w);
-        if (t(c.result)) {
-          var r = document.createElement('p'); r.className = 'client__r'; r.textContent = t(c.result);
-          li.appendChild(r);
-        }
-        el.appendChild(li);
-      });
-    }
-    var ce = document.getElementById('certs');
-    if (ce) {
-      ce.innerHTML = '';
-      CERTS.forEach(function (c) {
-        var li = document.createElement('li');
-        li.className = 'cert';
-        li.setAttribute('data-rv', 'text');
-        var n = document.createElement('span'); n.className = 'cert__n'; n.textContent = t(c.name);
-        var b = document.createElement('span'); b.className = 'cert__b'; b.textContent = t(c.by);
-        li.appendChild(n); li.appendChild(b);
-        ce.appendChild(li);
-      });
-    }
   }
 
   var wordEls = [];
@@ -580,7 +553,6 @@
   function measure() {
     vh = window.innerHeight;
     sizeRail();
-    sizeBts();
     docH = Math.max(1, document.documentElement.scrollHeight - vh);
     revealEls = [].slice.call(document.querySelectorAll('[data-rv]'));
   }
@@ -686,12 +658,17 @@
       }
     }
 
-    /* شريط الكواليس ينجرف أفقياً أثناء عبور قسمه الشاشة */
-    if (btsTravel > 0 && btsSec) {
+    /* حائط الكواليس: كل بطاقة تنزلق بسرعتها الخاصة مع ميلانها */
+    if (btsCards.length && btsSec) {
       var bb = btsSec.getBoundingClientRect();
-      var bp = clamp((vh - bb.top) / (vh + bb.height), 0, 1);
-      var brtl = root.getAttribute('dir') === 'rtl';
-      btsTrack.style.transform = 'translate3d(' + ((brtl ? 1 : -1) * btsTravel * bp).toFixed(1) + 'px,0,0)';
+      if (bb.bottom > -200 && bb.top < vh + 200) {
+        var bp = clamp((vh - bb.top) / (vh + bb.height), 0, 1) - .5;   /* -0.5 .. 0.5 */
+        for (var bi2 = 0; bi2 < btsCards.length; bi2++) {
+          var bc = btsCards[bi2];
+          bc.el.style.transform = 'translate3d(0,' + (-bp * bc.speed).toFixed(1) +
+                                  'px,0) rotate(' + bc.rot + 'deg)';
+        }
+      }
     }
 
     /* شريط الأرقام: خط ذهبي يمسح عرضه بمقدار مرورك عليه */
