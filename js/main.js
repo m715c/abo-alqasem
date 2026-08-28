@@ -407,6 +407,18 @@
       o.textContent = t(x.org) + (t(x.time) ? '  ·  ' + t(x.time) : '');
       head.appendChild(n); head.appendChild(r); head.appendChild(o);
 
+      /* المنصات — وسوم تحت اسم الجهة حين تكون أكثر من واحدة */
+      if (x.platforms && x.platforms.length) {
+        var pl = document.createElement('ul');
+        pl.className = 'exp__plats';
+        x.platforms.forEach(function (pf) {
+          var li2 = document.createElement('li');
+          li2.textContent = t(pf);
+          pl.appendChild(li2);
+        });
+        head.appendChild(pl);
+      }
+
       var ul = document.createElement('ul');
       ul.className = 'exp__items';
       x.items.forEach(function (it) {

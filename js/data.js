@@ -16,8 +16,8 @@ var PROFILE = {
   phone: '07732717805',
   phoneIntl: '+9647732717805',
   lede: {
-    en: 'I run campaigns end to end and write the content that carries them.',
-    ar: 'أدير الحملات من أولها إلى آخرها، وأكتب المحتوى الذي يحملها.'
+    en: 'I run campaigns end to end, and I write the content.',
+    ar: 'أدير الحملات من أولها إلى آخرها، وأكتب المحتوى.'
   },
   about: {
     en: 'Account manager and content writer with hands-on experience in marketing. I have run company openings and full advertising campaigns for clients across different sectors, including education. I believe any project succeeds the moment you truly understand the client and build trust that lasts.',
@@ -27,7 +27,7 @@ var PROFILE = {
 
 /* المهارات والتخصصات */
 var SKILLS = [
-  { en: 'Persuasive marketing copywriting', ar: 'كتابة المحتوى التسويقي الإقناعي', tag: 'Copywriting' },
+  { en: 'Marketing copywriting', ar: 'كتابة المحتوى التسويقي', tag: 'Copywriting' },
   { en: 'Creative and general content writing', ar: 'كتابة المحتوى الإبداعي والعام', tag: 'Content Writing' },
   { en: 'Marketing consulting & digital identity', ar: 'الاستشارات التسويقية وبناء الهوية الرقمية', tag: '' },
   { en: 'Content strategy planning', ar: 'تخطيط استراتيجيات المحتوى', tag: 'Content Strategy' },
@@ -67,10 +67,18 @@ var EXPERIENCE = [
   },
   {
     role:  { en: 'Content Writer', ar: 'كاتب محتوى' },
-    org:   { en: 'Shabab Plus · Ali Al-Rubaie official page', ar: 'منصة شباب بلص · صفحة علي الربيعي الرسمية' },
+    org:   { en: 'Across several platforms', ar: 'لعدّة منصات' },
     time:  { en: '', ar: '' },
+    /* المنصات تُعرض كوسوم تحت اسم الدور */
+    platforms: [
+      { en: 'Shabab Plus',        ar: 'شباب بلص' },
+      { en: 'Ali Al-Rubaie',      ar: 'علي الربيعي' },
+      { en: 'Jeel La Yukhda',     ar: 'جيل لا يخدع' },
+      { en: 'The Cultural Center', ar: 'المركز الثقافي' },
+      { en: 'Wa Bil-Iraqi',       ar: 'وبالعراقي' }
+    ],
     items: [
-      { en: 'Systematic creative and marketing content for the platform and its official channels.', ar: 'إنتاج محتوى إبداعي وتسويقي ممنهج للمنصة والقنوات الرسمية' },
+      { en: 'Systematic creative and marketing content for each platform and its channels.', ar: 'إنتاج محتوى إبداعي وتسويقي ممنهج لكل منصة وقنواتها' },
       { en: 'Post copy, scripts and content built to hold a young audience.', ar: 'كتابة نصوص المنشورات والسيناريوهات والمحتوى الجذاب لجمهور الشباب' },
       { en: 'Working with the production team to keep visual identity and content consistent.', ar: 'التنسيق مع فريق الإنتاج لضمان الاتساق في الهوية البصرية والمحتوى' },
       { en: 'Raising engagement rates and organic reach.', ar: 'المساهمة في رفع معدلات التفاعل والوصول العضوي على المنصات الرقمية' }

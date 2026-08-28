@@ -887,6 +887,19 @@ a { color: inherit; text-decoration: none; }
   margin-block: .35rem .3rem;
 }
 .exp__org { font-size: var(--t-sm); color: var(--muted); }
+
+/* وسوم المنصات */
+.exp__plats { display: flex; flex-wrap: wrap; gap: .35rem; margin-block-start: .8rem; }
+.exp__plats li {
+  padding: .28rem .7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: .72rem;
+  color: var(--muted);
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.exp__row.on .exp__plats li { color: var(--text); border-color: #343943; }
 .exp__items { display: grid; gap: .6rem; align-content: start; }
 .exp__items li {
   position: relative; font-size: var(--t-sm); color: var(--muted);
