@@ -5,7 +5,7 @@
 -------------------------------------------------------------------*/
 
 var PROFILE = {
-  name:  { en: 'Mohamed Hassan Al-Mousawi', ar: 'محمد حسن الموسوي' },
+  name:  { en: 'Mohamed Al-Mousawi', ar: 'محمد الموسوي' },
   role:  { en: 'Account Manager · Content Writer', ar: 'أكاونت مانجر · كاتب محتوى' },
   roles: {
     en: 'Account Manager & Content Writer',
@@ -154,6 +154,14 @@ var WORKS = [
   { id: 'v15', file: 'v15.mp4', ar: 1.7778, dur: 39, mb: 6.7,
     title: { en: 'Work 15', ar: 'عمل ١٥' },
     note:  { en: 'Widescreen edit.', ar: 'مونتاج بصيغة عريضة.' } },
+
+  { id: 'v16', file: 'v16.mp4', ar: 0.55, dur: 72, mb: 6.4,
+    title: { en: 'Work 16', ar: 'عمل ١٦' },
+    note:  { en: 'Vertical cut for social platforms.', ar: 'مونتاج عمودي لمنصات التواصل.' } },
+
+  { id: 'v17', file: 'v17.mp4', ar: 0.55, dur: 66, mb: 5.8,
+    title: { en: 'Work 17', ar: 'عمل ١٧' },
+    note:  { en: 'Vertical cut for social platforms.', ar: 'مونتاج عمودي لمنصات التواصل.' } },
 ];
 
 /* ------------------------------------------------------------------
