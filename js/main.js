@@ -294,9 +294,12 @@
 
       /* زاوية ثابتة لكل بطاقة وسرعة انزلاق مختلفة — يعطي الحائط
          إحساس صور مرمية لا شبكة منتظمة */
+      /* لكل بطاقة زاوية وإزاحة وسرعة خاصة — تُستخدم في حالة التبعثر */
       btsCards.push({
         el: b,
-        rot: [-3.2, 2.4, -1.6, 3.0, -2.6, 1.8, -3.4, 2.2][i % 8],
+        rot:   [-11, 8, -5, 13, -9, 6, -14, 10][i % 8],
+        dx:    [-26, 18, -12, 30, -20, 14, -32, 22][i % 8],
+        dy:    [34, -22, 40, -16, 28, -34, 20, -26][i % 8],
         speed: [26, 46, 14, 38, 20, 50, 30, 42][i % 8]
       });
     });
@@ -658,15 +661,21 @@
       }
     }
 
-    /* حائط الكواليس: كل بطاقة تنزلق بسرعتها الخاصة مع ميلانها */
+    /* حائط الكواليس: الصور مبعثرة ومائلة عند طرفَي القسم، وتنتظم
+       وتستوي تماماً حين يبلغ القسم منتصف الشاشة. الحركة قابلة للعكس. */
     if (btsCards.length && btsSec) {
       var bb = btsSec.getBoundingClientRect();
-      if (bb.bottom > -200 && bb.top < vh + 200) {
+      if (bb.bottom > -300 && bb.top < vh + 300) {
         var bp = clamp((vh - bb.top) / (vh + bb.height), 0, 1) - .5;   /* -0.5 .. 0.5 */
+        var scatter = ease(clamp(Math.abs(bp) * 2, 0, 1));             /* 0 بالمنتصف، 1 بالأطراف */
         for (var bi2 = 0; bi2 < btsCards.length; bi2++) {
           var bc = btsCards[bi2];
-          bc.el.style.transform = 'translate3d(0,' + (-bp * bc.speed).toFixed(1) +
-                                  'px,0) rotate(' + bc.rot + 'deg)';
+          var tx = bc.dx * scatter;
+          var ty = bc.dy * scatter - bp * bc.speed;
+          var rz = bc.rot * scatter;
+          var sc = 1 - .07 * scatter;
+          bc.el.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) +
+                                  'px,0) rotate(' + rz.toFixed(2) + 'deg) scale(' + sc.toFixed(3) + ')';
         }
       }
     }
