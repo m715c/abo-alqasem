@@ -335,7 +335,12 @@
     setText('heroCity',    t(PROFILE.city));
     setText('heroLede',    t(PROFILE.lede));
     setText('footName',    t(PROFILE.name));
-    setText('contactArea', t(PROFILE.area));
+
+    var em = document.getElementById('emailLink');
+    if (em) {
+      em.textContent = PROFILE.email;
+      em.setAttribute('href', 'mailto:' + PROFILE.email);
+    }
 
     var ph = document.getElementById('phoneLink');
     if (ph) {

@@ -15,6 +15,7 @@ var PROFILE = {
   area:  { en: 'Al-Shalijiya, Baghdad — Iraq', ar: 'الشالجية، بغداد — العراق' },
   phone: '07732717805',
   phoneIntl: '+9647732717805',
+  email: 'hassenmarem044@gmail.com',
   lede: {
     en: 'I run campaigns end to end, and I write the content.',
     ar: 'أدير الحملات من أولها إلى آخرها، وأكتب المحتوى.'
@@ -70,11 +71,10 @@ var EXPERIENCE = [
     time:  { en: '', ar: '' },
     /* المنصات تُعرض كوسوم تحت اسم الدور */
     platforms: [
-      { en: 'Shabab Plus',        ar: 'شباب بلص' },
-      { en: 'Ali Al-Rubaie',      ar: 'علي الربيعي' },
-      { en: 'Jeel La Yukhda',     ar: 'جيل لا يخدع' },
-      { en: 'The Cultural Center', ar: 'المركز الثقافي' },
-      { en: 'Wa Bil-Iraqi',       ar: 'وبالعراقي' }
+      { en: 'Shabab Plus - Ali Al-Rubaie', ar: 'شباب بلس - علي الربيعي' },
+      { en: 'Jeel La Yukhda',              ar: 'جيل لا يخدع' },
+      { en: 'The Cultural Center',         ar: 'المركز الثقافي' },
+      { en: 'Bil-Iraq',                    ar: 'بالعراق' }
     ],
     items: [
       { en: 'Systematic creative and marketing content for each platform and its channels.', ar: 'إنتاج محتوى إبداعي وتسويقي ممنهج لكل منصة وقنواتها' },
@@ -101,6 +101,9 @@ var EXPERIENCE = [
    العناوين مبدئية — استبدلها باسم كل عمل والجهة التي أُنتج لها.
 -------------------------------------------------------------------*/
 var WORKS = [
+  { id: 'v18', file: 'v18.mp4', ar: 1.8182, dur: 138, mb: 12.2,
+    title: { en: 'Work 18', ar: 'عمل ١٨' },
+    note:  { en: 'Widescreen edit.', ar: 'مونتاج بصيغة عريضة.' } },
   { id: 'v01', file: 'v01.mp4', ar: 0.5625, dur: 37,  mb: 4.3,
     title: { en: 'Work 01', ar: 'عمل ٠١' },
     note:  { en: 'Vertical cut for social platforms.', ar: 'مونتاج عمودي لمنصات التواصل.' } },
@@ -170,9 +173,6 @@ var WORKS = [
     title: { en: 'Work 17', ar: 'عمل ١٧' },
     note:  { en: 'Vertical cut for social platforms.', ar: 'مونتاج عمودي لمنصات التواصل.' } },
 
-  { id: 'v18', file: 'v18.mp4', ar: 1.8182, dur: 138, mb: 12.2,
-    title: { en: 'Work 18', ar: 'عمل ١٨' },
-    note:  { en: 'Widescreen edit.', ar: 'مونتاج بصيغة عريضة.' } },
 ];
 
 /* ------------------------------------------------------------------
